@@ -70,7 +70,6 @@ def beam_search_decode(emission_log_prob, blank=0, **kwargs):
                     for labels, accu_log_prob in total_accu_log_prob.items()]
     labels_beams.sort(key=lambda x: x[1], reverse=True)
     labels = labels_beams[0][0]
-
     return labels
 
 
@@ -132,8 +131,11 @@ def prefix_beam_decode(emission_log_prob, blank=0, **kwargs):
     return labels
 
 
-def ctc_decode(log_probs, label2char=None, blank=0, method='beam_search', beam_size=10):
-    emission_log_probs = np.transpose(log_probs.cpu().numpy(), (1, 0, 2))
+def ctc_decode(log_probs, label2char=None, blank=0, method='beam_search', beam_size=10, mode="train"):
+    if mode == "train":
+        emission_log_probs = np.transpose(log_probs.detach().cpu().numpy(), (1, 0, 2))
+    else:
+        emission_log_probs = np.transpose(log_probs.cpu().numpy(), (1, 0, 2))
     # size of emission_log_probs: (batch, length, class)
 
     decoders = {
