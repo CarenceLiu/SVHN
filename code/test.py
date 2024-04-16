@@ -55,14 +55,14 @@ for batch_idx, (images, labels, label_lens) in enumerate(test_loader):
         # print(pred_labels, real_label)
         if pred_label == real_label:
             correct += 1
-            if correct <= 10:
-                originImage = test_data.getOriginImage(idx)
-                originImage.save("../result/correct_%d_pred_%s_real_%s.jpg" % (correct, "".join([str(s) for s in pred_label]), "".join([str(s) for s in real_label])))
+            # if correct <= 10:
+            #     originImage = test_data.getOriginImage(idx)
+            #     originImage.save("../result/correct_%d_pred_%s_real_%s.jpg" % (correct, "".join([str(s) for s in pred_label]), "".join([str(s) for s in real_label])))
         else:
             wrong += 1
-            if wrong <= 10:
-                originImage = test_data.getOriginImage(idx)
-                originImage.save("../result/wrong_%d_pred_%s_real_%s.jpg" % (wrong, "".join([str(s) for s in pred_label]), "".join([str(s) for s in real_label])))
+            # if wrong <= 10:
+            #     originImage = test_data.getOriginImage(idx)
+            #     originImage.save("../result/wrong_%d_pred_%s_real_%s.jpg" % (wrong, "".join([str(s) for s in pred_label]), "".join([str(s) for s in real_label])))
         idx += 1
                 
 
